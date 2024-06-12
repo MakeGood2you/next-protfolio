@@ -1,31 +1,18 @@
 <template>
   <div class="main-container">
-    <div class="hero" id="hero">
+    <div class="change-lang">
+      <ChangeLangButton></ChangeLangButton>
+    </div>
+    <div id="hero" class="hero">
       <div class="canvas">
         <canvas class="connecting-dots"></canvas>
       </div>
       <div class="heading">
         <div class="heading__line-1">Hello, I'm <span>Kobi</span>.</div>
         <div class="heading__line-2">I'm a full stack web developer.</div>
-        <a href="#about" class="heading__link">
-          <div class="heading-cta">
-            View my work
-
-            <svg
-                class="heading__arrow"
-                version="1.1"
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-            >
-              <title>arrow-right</title>
-              <path
-                  d="M11.293 5.707l5.293 5.293h-11.586c-0.552 0-1 0.448-1 1s0.448 1 1 1h11.586l-5.293 5.293c-0.391 0.391-0.391 1.024 0 1.414s1.024 0.391 1.414 0l7-7c0.092-0.092 0.166-0.202 0.217-0.324 0.101-0.245 0.101-0.521 0-0.766-0.049-0.118-0.121-0.228-0.217-0.324l-7-7c-0.391-0.391-1.024-0.391-1.414 0s-0.391 1.024 0 1.414z"
-              ></path>
-            </svg>
-          </div>
-        </a>
+        <div class="heading-cta">
+          <LearnMoreButton/>
+        </div>
       </div>
     </div>
 
@@ -40,8 +27,12 @@
 </template>
 
 <script>
+import LearnMoreButton from '@/components/LearnMoreButton';
+import ChangeLangButton from '@/components/ChangeLangButton';
+
 export default {
   name: "ConnectingDots",
+  components: { LearnMoreButton,ChangeLangButton },
   data: () => ({
     draw: null
   }),
@@ -275,8 +266,8 @@ export default {
         // console.log(mousePosition.x);
       };
 
-      // mousePosition.x = window.innerWidth / 2;
-      // mousePosition.y = window.innerHeight / 2;
+      mousePosition.x = window.innerWidth / 2;
+      mousePosition.y = window.innerHeight / 2;
 
       this.draw = setInterval(createDots, 1000 / 30);
       //
@@ -509,6 +500,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '../css/colors.scss';
 @import '../css/_base.scss';
 @import '../css/animations.scss';
 
@@ -516,8 +508,18 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100vw;
+  background-color: $color-background
 }
+.change-lang {
+  position: relative;
+  display: flex;
+  align-items: center;
+  color: white;
+  overflow: hidden;
+  z-index: 1000;
 
+}
 .hero {
   position: relative;
   display: flex;
@@ -605,17 +607,7 @@ export default {
     display: flex;
     align-items: center;
     margin-top: 2.4rem;
-    padding: 0.8rem 3rem;
-    width: 27.5rem;
-    height: 4.8rem;
 
-    background-color: rgba($color-background, 0.6);
-    border: 2px solid $color-sea;
-    border-radius: 2px;
-
-    color: $color-sea;
-    font-size: 2.4rem;
-    font-weight: 500;
 
     cursor: pointer;
     animation: moveInBottom 0.7s 1.2s;

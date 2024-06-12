@@ -1,7 +1,7 @@
 <template>
   <div>
   <div class="btn-container">
-    <button>
+    <button class="">
       <span class="text">Learn More</span>
       <div class="icon-container">
         <div class="icon icon--left">
@@ -41,6 +41,7 @@ export default {
 
 <style lang="scss" scoped>
 @import '../css/colors.scss';
+@import '../css/animations.scss';
 
 .btn-container {
   width: 100%;
@@ -52,7 +53,7 @@ export default {
   opacity:0.8;
 
   &:nth-child(1) {
-    --btn-bg: #00daa7;
+    --btn-bg: #09F1F1FF;
   }
 }
 
@@ -67,7 +68,7 @@ button {
   color: #fff;
   font-family: "Montserrat";
   font-weight: bold;
-  background: rgba(0, 0, 0, 0.3);
+  background: $color-background-light;
   cursor: pointer;
   overflow: hidden;
   display: flex;
@@ -77,6 +78,7 @@ button {
 
   .text,
   .icon-container {
+    color: black;
     position: relative;
     z-index: 2;
   }
@@ -127,7 +129,9 @@ button {
     &::after {
       transform: translateX(65%);
     }
-
+    .text {
+      color: #09F1F1FF;
+    }
     .icon-container {
       transform: translateX(125%);
       .icon {
@@ -144,22 +148,4 @@ button {
   }
 }
 
-//.support{
-//  position: absolute;
-//  right: 10px;
-//  bottom: 10px;
-//  padding: 10px;
-//  display: flex;
-//  a{
-//    margin: 0 10px;
-//    color: #fff;
-//    font-size: 1.8rem;
-//    backface-visibility: hidden;
-//    transition: all 150ms ease;
-//    &:hover{
-//      transform: scale(1.1);
-//    }
-//  }
-//
-//}
 </style>

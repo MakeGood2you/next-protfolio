@@ -10,8 +10,8 @@
       <div class="heading">
         <div class="heading__line-1">Hello, I'm <span>Kobi</span>.</div>
         <div class="heading__line-2">I'm a full stack web developer.</div>
-        <div class="heading-cta">
-          <LearnMoreButton/>
+        <div @click="$emit('scrollTo', 'AboutMe')" class="heading-cta">
+          <LearnMoreButton />
         </div>
       </div>
     </div>
@@ -508,7 +508,7 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100vw;
+  width: 100%;
   background-color: $color-background
 }
 .change-lang {
@@ -517,7 +517,7 @@ export default {
   align-items: center;
   color: white;
   overflow: hidden;
-  z-index: 1000;
+  z-index: 3;
 
 }
 .hero {
@@ -525,7 +525,7 @@ export default {
   display: flex;
   height: 100vh;
   width: 100%;
-  z-index: 999;
+  z-index: 2;
 }
 
 .canvas {

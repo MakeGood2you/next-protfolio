@@ -1,77 +1,133 @@
 <template>
-<section>
-  <nav class="navigation-bar">
-    <ul class="navigation">
-      <li class="navigation__item navigation__item--active" id="nav-hero"><a href="#hero">Home</a></li>
-      <li class="navigation__item" id="nav-about"><a href="#about">About</a></li>
-      <li class="navigation__item" id="nav-projects"><a href="#projects">Projects</a></li>
-      <li class="navigation__item" id="nav-contact"><a href="#contact">Contact</a></li>
-    </ul>
-  </nav>
-</section>
+  <div class="temp-container">
+<!--    <div v-if="sticky" class="temp-container"></div>-->
+    <div
+        key="NavBar"
+        ref="NavBar"
+        :class="{ sticky: isSticky }"
+        @scroll="handleScroll('AboutMe')">
+      <nav class="navigation-bar">
+        <button class="pulse" @click="scrollToElement('AboutMe')">About Me</button>
+        <button class="pulse" @click="scrollToElement('MyProjects')">My Projects</button>
+        <button class="pulse" @click="scrollToElement('ContactMe')">Contact Me</button>
+      </nav>
+    </div>
+  </div>
 </template>
 
 <script>
+// import { globalMixin } from '../mixins/global'
+
 export default {
-  name: "NavBar"
+  name: "NavBar",
+  props: {},
+
+  data: () => ({
+    isSticky: false,
+    sticky: 812
+  }),
+  methods: {
+    scrollToElement(el) {
+      if (el) {
+        this.$emit('scrollTo', el)
+      }
+    },
+    handleScroll() {
+      const tempSticky = this.$refs.NavBar.offsetTop
+
+      this.sticky = tempSticky !== 0 ? this.sticky = tempSticky : this.sticky
+
+      window.pageYOffset >= this.sticky
+          ? this.isSticky = true
+          : this.isSticky = false
+    }
+  },
+  created() {
+    window.addEventListener('scroll', this.handleScroll);
+  },
+  unmounted() {
+    window.removeEventListener('scroll', this.handleScroll);
+  },
 }
 </script>
 
 <style lang="scss" scoped>
 @import '../css/colors.scss';
+@import '../css/animations.scss';
 
-.navigation {
-  display: flex;
-  margin-right: 10rem;
+.navigation-bar {
+  padding: 2rem;
+}
 
-  font-size: 2rem;
-  font-weight: 500;
-  letter-spacing: 1px;
+.temp-container {
+height: 132px;
+}
 
-  @media (max-width: 1200px) {
-    margin-right: 3rem;
+.sticky {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 4 !important;
+  overflow: hidden;
+
+
+}
+
+.sticky + .content {
+  //padding-top: 60px;
+}
+
+.pulse:hover,
+.pulse:focus {
+  animation: pulse 1s;
+  box-shadow: 0 0 0 2em transparent;
+}
+
+.pulse:hover,
+.pulse:focus {
+  animation: pulse 1s;
+  box-shadow: 0 0 0 2em transparent;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 var(--hover);
   }
+}
 
-  @media (max-width: 700px) {
-    margin-right: 0;
+.pulse {
+  --color: #{$color-sea};
+  --hover: #{adjust-hue($color-sea, 10deg)};
+}
+
+// Now every button will have different colors as set above. We get to use the same structure, only changing the custom properties.
+button {
+  color: var(--color);
+  transition: 0.25s;
+
+  &:hover,
+  &:focus {
+    border-color: var(--hover);
+    color: $color-sea;
   }
+}
 
-  &-bar {
-    position: sticky;
-    position: -webkit-sticky;
-    top: 0;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    height: 6rem;
-    border-bottom: 1px solid $color-background;
-    background-color: rgba($color-background-light, 0.95);
-    backdrop-filter: blur(8px);
+button {
+  cursor: pointer;
+  background: none;
+  border: 2px solid;
+  border-radius: 20px;
+  font: inherit;
+  line-height: 1;
+  margin: 0.5em;
+  padding: 1em 2em;
+  color: white;
+}
 
-    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.3);
-
-    z-index: 99999999999;
-
-    @media (max-width: 700px) {
-      justify-content: center;
-    }
-  }
-
-  &__item {
-    transition: all 0.2s;
-    &:not(:last-child) {
-      margin-right: 3rem;
-    }
-
-    &--active {
-      color: $color-sea;
-      // font-weight: 600;
-    }
-    &:hover {
-      color: $color-sea;
-      // font-weight: 600;
-    }
-  }
+h1 {
+  font-weight: 400;
 }
 
 </style>

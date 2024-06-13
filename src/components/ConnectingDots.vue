@@ -513,7 +513,8 @@ export default {
 }
 .change-lang {
   position: relative;
-  display: flex;
+  //display: flex;
+  display: none;
   align-items: center;
   color: white;
   overflow: hidden;
@@ -581,17 +582,23 @@ export default {
 
   &__line-1,
   &__line-2 {
-    font-size: 6rem;
+    font-size: 5rem;
     background-color: (rgba($color-background, 0.25));
 
     animation-duration: 1.4s;
     animation-timing-function: cubic-bezier(0.21, 1.11, 0.81, 0.99);
 
     @media (max-width: 700px) {
-      font-size: 5rem;
+      font-size: 4rem;
       text-align: center;
       margin-left: 4rem;
       margin-right: 4rem;
+    }
+    @media (max-width: 600px) {
+      font-size: 3rem;
+      text-align: center;
+      margin-left: 3rem;
+      margin-right: 3rem;
     }
 
     @media (max-width: 550px) {
@@ -633,11 +640,8 @@ export default {
     top: 0;
     width: 100%;
 
-    background-color: royalblue;
-
-    // z-index: 999;
+    background-color: $color-sea;
   }
-
 }
 
 </style>

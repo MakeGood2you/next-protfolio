@@ -4,6 +4,9 @@ import Image from 'next/image'
 // next LINK
 import Link from 'next/link'
 
+// components
+import Socials from '../components/Socials'
+
 
 const Header = () => {
     return (
@@ -13,14 +16,15 @@ const Header = () => {
                     {/*logo*/}
                     <Link href={'/'}>
                         <Image
-                            src={'/logo.svg'}
-                            width={220}
+                            src={'/logo3.png'}
+                            width={300}
                             height={48}
                             alt=""
                             priority={true}
                         />
                     </Link>
-
+                    {/*socials*/}
+                    <Socials/>
                 </div>
             </div>
         </header>
